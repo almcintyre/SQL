@@ -1,0 +1,41 @@
+create table Passenger(
+	Name varchar PRIMARY KEY
+);
+
+CREATE TABLE SEAT(
+	CLASS CHAR(10),
+	ROW INT NOT NULL PRIMARY KEY,
+	COLUMN1 CHAR(1) UNIQUE,
+	EXIT CHAR(1)
+);
+
+create table Flight(
+	FlightID char(5) PRIMARY KEY,
+	FlightSource char(3),
+	FlightDestination char(3),
+	FlightTime time,
+	FlightDate date,
+	Distance integer
+);
+
+create table Plane(
+	PlaneID char(5) PRIMARY KEY,
+	PlaneType char(20)
+);
+
+create table Purchases(
+	PassengerName varchar references passenger (Name),
+	Row int not null references SEAT (ROW),
+	Column1 char(1) references SEAT (COLUMN1)
+	);
+
+create table BookedIn(
+	FlightID char (5) REFERENCES Flight (flightID),
+	Row int not null REFERENCES Seat (row),
+	Column1 char(1) REFERENCES Seat (column1)
+);
+
+create table isAssigned(
+	PlaneID char(5) references Plane (PlaneID),
+	FlightID char(5) references Flight (FlightID)
+);

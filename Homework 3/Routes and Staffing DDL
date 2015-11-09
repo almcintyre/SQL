@@ -1,0 +1,40 @@
+create table Airline(
+	Code char(3) PRIMARY KEY
+);
+
+create table Route(
+	OriginCode char(3) references Airline (Code),
+	DestinationCode char(3) references Airline(code),
+	CodeShare char(1),
+	Stops smallint,
+	PlaneID char(20) references Aircraft (PlaneID)
+);
+
+create table Flight(
+	FlightNumber smallint,
+	FromAirline char(3) references Airline(Code),
+	ToAirline char(3) references Airline(Code),
+	Distance integer,
+	DepartureTime time,
+	DepartureDate date
+);
+
+create table Aircraft(
+	PlaneID char(20) PRIMARY KEY,
+	PlaneName char(20),
+	Crew smallint,
+	Range smallint
+);
+
+create table Employee(
+	EmployeeID smallint PRIMARY KEY,
+	EmployeeName varchar,
+	EmployeeRole varchar,
+	EmployeeSalary integer,
+	ServiceDate date
+);
+
+create table Certified(
+	EmployeeID smallint references Employee (EmployeeID),
+	PlaneID char(20) references Aircraft (PlaneID)
+);
