@@ -38,3 +38,12 @@ create table Certified(
 	EmployeeID smallint references Employee (EmployeeID),
 	PlaneID char(20) references Aircraft (PlaneID)
 );
+
+create table AirportCodes(
+	CityName char(20),
+	AirportCode char(3),
+	AirportName char(20),
+	CountryName char(20),
+	CountryAbbrev char(2),
+	AreaCode smallint
+);
